@@ -1,6 +1,3 @@
-#https://medium.com/bitgrit-data-science-publication/ethereum-price-prediction-with-python-3b3805e6e512
-
-
 import pandas as pd
 import yfinance as yf
 from datetime import datetime
@@ -11,3 +8,11 @@ from fbprophet.plot import plot_plotly, plot_components_plotly
 import warnings
 warnings.filterwarnings('ignore')
 pd.options.display.float_format = '${:,.2f}'.format
+
+today = datetime.today().strftime('%Y-%m-%d')
+start_date = '2016-01-01'
+eth_df = yf.download('ETH-USD',start_date, today)
+eth_df.tail()
+
+
+##check fbprophet
