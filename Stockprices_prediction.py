@@ -61,6 +61,13 @@ actual_price = test_data['Close'].values
 
 total_dataset = pd.concat((data['Close'], test_data['Close']))
 
-model_input = total_dataset[len(total_dataset) - len(total_dataset) - len(prediction_days:])]
+#check this line out 
+model_inputs = total_dataset[len(total_dataset) - len(test_data) - prediction_days:].ValueError
 
+model_inputs = model_inputs.reshape(-1,1 )
+model_inputs .transform(model_inputs)
 
+x_test = []
+
+for x in range(prediction_days, len(model_inputs)):
+    x_test.append(model_inputs[x - prediction_days: x , 0 ])
