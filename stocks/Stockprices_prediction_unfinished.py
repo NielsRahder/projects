@@ -71,3 +71,6 @@ x_test = []
 
 for x in range(prediction_days, len(model_inputs)):
     x_test.append(model_inputs[x - prediction_days: x , 0 ])
+
+
+x_test = np.array(x_test)
