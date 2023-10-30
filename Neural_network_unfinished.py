@@ -18,6 +18,11 @@ weights = [[0.2, 0.8, -0.5, 1.0 ],
 
 biases = [2, 3, 0.5]
 
+output = np.dot(weights, inputs ) + biases #weights should come first in order to prevent a shape error
+
+print("this is dot prod output:", output)
+
+
 layer_outputs = []
 for neuron_weights, neuron_bias in zip(weights, biases):
     neuron_output = 0 
@@ -28,7 +33,6 @@ for neuron_weights, neuron_bias in zip(weights, biases):
 
 print(layer_outputs)
 
-#stayed at lecture 3, 9:16
 
  
 
