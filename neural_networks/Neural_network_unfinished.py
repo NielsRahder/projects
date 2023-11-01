@@ -1,37 +1,33 @@
-url = " https://www.youtube.com/watch?v=Wo5dMEP_BbI&list=PLQVvvaa0QuDcjD5BAw2DxE6OF2tius3V3"
-
 import numpy as np
 import sys 
 import matplotlib 
 
-print("python", sys.version)
-print("Numpy", np.__version__)
-print("matplotlib:", matplotlib.__version__)
-
-inputs = [1, 2, 3, 2.5]
+inputs = [[1, 2, 3, 2.5], 
+          [2.0, 5.0, -1.0, 2.0], 
+          [-1.5, 2.7, 3.3, -0.8]]
 
 #for each input there is a unique weight, but the bias is for each neuron specifically so it is only one
 
 weights = [[0.2, 0.8, -0.5, 1.0 ], 
            [0.5, -0.91, 0.26, -0.5], 
-           [-0.26, -0.27, 0.17, 0.87 ]]
+           [-0.26, -0.27, 0.17, 0.87]]
 
 biases = [2, 3, 0.5]
 
-output = np.dot(weights, inputs ) + biases #weights should come first in order to prevent a shape error
+weights2 = [[0.1, -0.14, -0.5 ], 
+           [-0.5, 0.12, -0.33], 
+           [-0.44, 0.73, -0.13]]
 
-print("this is dot prod output:", output)
+biases2 = [-1, 2, -0.5]
+
+layer1_ouputs = np.dot(inputs, np.array(weights).T) + biases #watch shape errors
+layer2_ouputs = np.dot(layer1_ouputs, np.array(weights2).T) + biases2 #watch shape errors
+
+print(layer2_ouputs)
 
 
-layer_outputs = []
-for neuron_weights, neuron_bias in zip(weights, biases):
-    neuron_output = 0 
-    for n_input, weight in zip (inputs, neuron_weights):
-        neuron_output += n_input*weight
-    neuron_output += neuron_bias
-    layer_outputs.append(neuron_output)
 
-print(layer_outputs)
+
 
 
  
