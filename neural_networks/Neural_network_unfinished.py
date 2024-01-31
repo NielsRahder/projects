@@ -1,12 +1,29 @@
 import numpy as np
-import sys 
-import matplotlib 
+import nnfs
+from nnfs.datasets import spiral_data
 
-np.random.seed(0)
+nnfs.init()
 
 X = [[1, 2, 3, 2.5], 
     [2.0, 5.0, -1.0, 2.0], 
     [-1.5, 2.7, 3.3, -0.8]]
+
+X, y = spiral_data(100, 3)
+
+'''
+#rectified linear activation function
+inputs = [0, 2, -1, 3.3, -2.7, 1.1, 2.2, -100]
+output = []
+
+for i in inputs:
+    if i > 0:
+        output.append(i)
+    elif i <= 0:
+        output.append(0)
+
+print(output)
+'''
+
 
 class Layer_Dense:
     def __init__ (self, n_inputs, n_neurons):
@@ -15,11 +32,16 @@ class Layer_Dense:
     def forward(self, inputs):
         self.output = np.dot(inputs, self.weights) + self.biases
 
-Layer_1 = Layer_Dense(4, 5 )
-Layer_2 = Layer_Dense(5, 5 ) #input needs to be output from previous layer
+class Activation_ReLU:
+    def forward(self, inputs):
+        self.output = np.maximum(0, inputs)
 
+
+Layer_1 = Layer_Dense(2, 5)
+activation1 = Activation_ReLU() #same activation function for all neurons in the layer
 
 Layer_1.forward(X)
-print(Layer_1.output)
-Layer_2.forward(Layer_1.output)
-print(Layer_2.output)
+
+print(Layer_1.output) #without activation function 
+activation1.forward(Layer_1.output)
+print(activation1.output) #no negative values, and lot of 0's
